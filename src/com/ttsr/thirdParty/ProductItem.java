@@ -1,6 +1,8 @@
 package com.ttsr.thirdParty;
 
-public class ProductItem {
+import com.ttsr.observer.Notifier;
+
+public class ProductItem extends Notifier {
     String productName;
     int productPrice;
 
@@ -17,7 +19,9 @@ public class ProductItem {
     }
 
     public void setProductName(String productName) {
+        String temp = this.productName;
         this.productName = productName;
+        notify(String.format("'%s' title change to '%s'",temp,productName));
     }
 
     public int getProductPrice() {
@@ -25,6 +29,13 @@ public class ProductItem {
     }
 
     public void setProductPrice(int productPrice) {
+        int temp = this.productPrice;
         this.productPrice = productPrice;
+        notify(String.format("Price %s change to %s",temp,productPrice));
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%s",productName);
     }
 }
